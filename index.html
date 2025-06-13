@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Proyecto Vanilla JS</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+</head>
+
+<body>
+    <!-- Loader -->
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+    <div class="row container-fluid m-0">
+        <div class="row">
+            <h1 class="text-center fw-bold fs-2" s>¡Gran rifa de fin de año!</h1>
+            <p>
+                Participa por la oportunidad de ganar $5.000.000 de pesos.
+                Selecciona tu número de la suerte entre los disponibles y asegura tu participación antes de que se
+                agoten.
+                ¡Mucha suerte!
+            </p>
+        </div>
+        <div class="row">
+            <span>Valor de la boleta: $100.000</span>
+            <span>Juega el 15 de diciembre con la loteria de Risaralda. Ultimas dos cifras.</span>
+        </div>
+        <div class="row text-center mb-3">
+            <span class="fw-bold">Seleccionar números</span>
+        </div>
+        <div id="div_numbers" class="mb-5"></div>
+        <div class="row">
+            <div class="col d-flex justify-content-end confirmar">
+                <button id="confirmar-btn" class="btn btn-primary" disabled data-bs-toggle="modal"
+                    data-bs-target="#confirmModal">Confirmar</button>
+            </div>
+        </div>
+
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="miModalLabel">Confirma tus boletas</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="selectedNumbers" class="mb-3 selected-numbers"></div>
+                        <form id="formulario" class="needs-validation" novalidate>
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                <div class="invalid-feedback">
+                                    Por favor ingresa tu nombre.
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Teléfono</label>
+                                <input type="tel" class="form-control" id="telefono" name="telefono" required
+                                    pattern="[0-9]{10,15}">
+                                <div class="invalid-feedback">
+                                    Por favor ingresa un teléfono válido.
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-primary">Aceptar</button>  
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <!-- <div class="modal-footer d-flex justify-content-center"> -->
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> -->
+                        <!-- <button type="submit" class="btn btn-primary">Aceptar</button> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+        crossorigin="anonymous"></script>
+</body>
+</body>
+
+</html>
