@@ -73,3 +73,79 @@ body {
     border-radius: 6px;
     font-weight: bold;
 }
+
+.confirm-alert {
+    background-color: #e67d0d73;
+    padding: 5px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.boletas-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 20px;
+}
+
+.boleta {
+    border: 2px solid #007bff;
+    padding: 1rem;
+    width: 260px;
+    font-family: Arial, sans-serif;
+    color: #007bff;
+    background: #fff;
+    position: relative;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.boleta h3 {
+    font-size: 20px;
+    margin: 0;
+    font-weight: bold;
+}
+
+.boleta small {
+    font-size: 12px;
+    color: #444;
+}
+
+.boleta .field {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.boleta .number {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #000;
+}
+
+/* Contenedor scrollable dentro del modal */
+.boletas-modal-body {
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Estilo para el contenedor general de las boletas */
+.boletas-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* centra horizontalmente las boletas */
+    gap: 1rem;
+}
+
+/* Estilo individual de boleta (opcional, mejora visual) */
+.boleta {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    width: 100%;
+    max-width: 300px;
+    background-color: #fdfdfd;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}

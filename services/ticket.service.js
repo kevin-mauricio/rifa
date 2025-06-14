@@ -8,7 +8,7 @@ export function hideLoader() {
     if (loader) loader.style.display = "none";
 }
 
-const api = 'https://script.google.com/macros/s/AKfycbxX3GVF2XQP4dskFUWQLnBVpsSXwO2oJpGHN9sthQTd4emEXYtopVIYRuYLGvGRM3i64Q/exec';
+const api = 'https://script.google.com/macros/s/AKfycbzlMcn1GOKRBRfZH_KxKIL_j7WVK4aT9NlyYDzgCYextcDhGX1CSIOER01WMMXR18mokA/exec';
 
 export async function getTickets() {
     showLoader();

@@ -1,6 +1,7 @@
 import { getTickets, saveTickets } from "../services/ticket.service.js";
 
 let selectedTickets = [];
+export let info = null;
 
 export function printNumbers() {
     const divNumbers = document.getElementById('div_numbers');
@@ -43,6 +44,10 @@ function createButton(ticket) {
         button.classList.add('unavailable')
     }
 
+    if (selectedTickets.length && selectedTickets.some(t => t.id === ticket.id)) {
+        button.classList.add('selected')
+    }
+
     button.addEventListener('click', () => {
         button.classList.toggle('selected');
 
@@ -66,11 +71,11 @@ export function setConfirmInfo() {
     const selectedNumbers = document.getElementById('selectedNumbers');
 
     selectedNumbers.innerHTML = 'Números seleccionados: ';
-    let resum = '';
+    /* let resum = '';
     selectedTickets.forEach((ticket, index) => {
         resum += `${ticket.number} ${index !== selectedTickets.length - 1 ? ' - ' : ''}`
-    });
-    selectedNumbers.innerHTML += resum;
+    }); */
+    selectedNumbers.innerHTML += setNumbers(selectedTickets);
 
     resetForm();
 }
@@ -104,14 +109,94 @@ export function save(e) {
     console.log('body', body);
     saveTickets(body).then(response => {
         console.log("Respuesta del servidor:", response);
-        if (response.status === 'success') {
-            form.reset();
-            form.classList.remove('was-validated');
+        const { status, unavailable, message } = response;
 
-            setTimeout(() => {
-                location.reload();
-            },);
+        if (status === 'error' && unavailable) {
+            const alert = document.getElementById('confirmAlert');
+            alert.hidden = false;
+            alert.innerHTML = `${message} ${setNumbers(unavailable)} \n Por favor, acepta o selecciona otros números`;
+
+            selectedTickets = selectedTickets.filter(ticket => {
+                return !unavailable.some(un => un.id === ticket.id);
+            });
+
+            setConfirmInfo();
+            printNumbers();
+        }
+
+        if (status === 'success') {
+            resetForm();
+            closeConfirmModal();
+            showTickets(body);
         }
     });
+}
 
+function setNumbers(list) {
+    let resum = '';
+    list.forEach((ticket, index) => {
+        resum += `${ticket.number} ${index !== list.length - 1 ? ' - ' : ''}`
+    });
+
+    return `( ${resum})`;
+}
+
+function closeConfirmModal() {
+    const modalElement = document.getElementById('confirmModal');
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+
+    // Si no hay instancia aún (por ejemplo, si abriste con HTML)
+    const modal = modalInstance || new bootstrap.Modal(modalElement);
+    modal.hide();
+}
+
+/* function showTickets(ticketsInfo) {
+    console.log('boletas compradas', ticketsInfo);
+
+    setTimeout(() => {
+        location.reload();
+    },);
+} */
+
+export function showTickets(ticketsInfo) {
+    const container = document.getElementById("boletas-container");
+    container.innerHTML = ""; // limpia anteriores
+
+    const { name, phone, tickets } = ticketsInfo;
+    const parsedTickets = JSON.parse(tickets);
+
+    parsedTickets.forEach(ticket => {
+        const boleta = document.createElement("div");
+        boleta.className = "boleta";
+
+        boleta.innerHTML = `
+            <h3>GRAN RIFA</h3>
+            <div class="number">#${ticket.number}</div>
+            <div class="field"><strong>Nombre:</strong> ${name}</div>
+            <div class="field"><strong>Teléfono:</strong> ${phone}</div>
+            <div class="field"><strong>ID:</strong> ${ticket.id}</div>
+            <div class="field"><strong>Disponible:</strong> ${ticket.available}</div>
+            <small>Nota: Boleta sin cancelar no juega</small>
+        `;
+
+        container.appendChild(boleta);
+    });
+    info = { clientName: name };
+    openModalBoletas();
+}
+
+function openModalBoletas() {
+    const modalElement = document.getElementById('boletas');
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+
+    // Si no hay instancia aún, créala
+    const modal = modalInstance || new bootstrap.Modal(modalElement);
+    modal.show(); // ← Mostrar el modal
+}
+
+export function formatDateDMY(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // +1 porque enero es 0
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
 }

@@ -40,17 +40,18 @@
             </div>
         </div>
 
-        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h5 class="modal-title" id="miModalLabel">Confirma tus boletas</h5>
+                        <h5 class="modal-title" id="confirmLabel">Confirma tus boletas</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
 
                     <div class="modal-body">
                         <div id="selectedNumbers" class="mb-3 selected-numbers"></div>
+                        <div id="confirmAlert" class="mb-3 confirm-alert" hidden></div>
                         <form id="formulario" class="needs-validation" novalidate>
                             <div class="mb-3">
                                 <label for="nombre" class="form-label">Nombre</label>
@@ -69,27 +70,48 @@
                                 </div>
                             </div>
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-primary">Aceptar</button>  
+                                <button type="submit" class="btn btn-primary">Aceptar</button>
                             </div>
                         </form>
 
                     </div>
 
                     <!-- <div class="modal-footer d-flex justify-content-center"> -->
-                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> -->
-                        <!-- <button type="submit" class="btn btn-primary">Aceptar</button> -->
-                    </div>
-
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> -->
+                    <!-- <button type="submit" class="btn btn-primary">Aceptar</button> -->
                 </div>
+
             </div>
         </div>
+    </div>
 
+    <div class="modal fade" id="boletas" tabindex="-1" aria-labelledby="boletasLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="boletasLabel">Tus boletas</h5>
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button> -->
+                </div>
+
+                <div class="modal-body boletas-modal-body">
+                    <div id="boletas-container" class="boletas-container"></div>
+                </div>
+
+                <div class="modal-footer d-flex justify-content-center">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button> -->
+                    <button type="submit" class="btn btn-primary">Descargar</button>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script type="module" src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
         crossorigin="anonymous"></script>
+    <script src="https://raw.githack.com/eKoopmans/html2pdf/master/dist/html2pdf.bundle.js"></script>
 </body>
 </body>
 
