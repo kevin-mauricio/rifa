@@ -1,3 +1,4 @@
+import { sendBoletasByEmail } from './email.js';
 import { formatDateDMY, info, printNumbers, save, setConfirmInfo } from './ticket.js';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -28,13 +29,15 @@ document.getElementById('confirmModal').addEventListener('hidden.bs.modal', () =
     alert.hidden = true;
 });
 
-document.querySelector('#boletas .btn.btn-primary').addEventListener('click', () => {
+document.querySelector('#boletas .btn.btn-primary').addEventListener('click', async () => {
     const element = document.getElementById('boletas-container');
     const { clientName } = info;
     const date = formatDateDMY(new Date());
+    const filename = `boletas-${clientName}-${date}.pdf`
+
     const opt = {
         margin: 0.2,
-        filename: `boletas-${clientName}-${date}.pdf`,
+        filename: filename,
         image: { type: 'jpeg', quality: 0.98 },
         html2canvas: {
             scale: 2,
@@ -46,5 +49,19 @@ document.querySelector('#boletas .btn.btn-primary').addEventListener('click', ()
         pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
     };
 
-    html2pdf().set(opt).from(element).save();
+
+    try {
+        // Generar PDF como blob
+        const pdfBlob = await html2pdf().set(opt).from(element).outputPdf('blob');
+        // Descargar el PDF
+        html2pdf().set(opt).from(element).save();
+        // Enviar por correo
+        sendBoletasByEmail(pdfBlob, filename, clientName, 'andrealancastillo@gmail.com');
+        // Recargar solo después de un pequeño retraso para permitir descarga y envío
+        setTimeout(() => location.reload(), 3000);
+
+    } catch (error) {
+        console.error("Error al generar o descargar el PDF:", error);
+    }
 });
+

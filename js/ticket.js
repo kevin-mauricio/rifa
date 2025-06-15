@@ -165,6 +165,15 @@ export function showTickets(ticketsInfo) {
     const { name, phone, tickets } = ticketsInfo;
     const parsedTickets = JSON.parse(tickets);
 
+    const infoContainer = document.createElement('div');
+    infoContainer.className = 'container'
+    infoContainer.innerHTML = `
+                        <div class="field"><strong>Premio:</strong> $5.000.000</div>
+                        <div class="field"><strong>Valor boleta:</strong> $100.000</div>
+                        <div class="field"><strong>Juega:</strong> Viernes, 19 de dic 2025 con las dos últimas cifras de la lotería de Risaralda</div>
+                    `;
+    container.appendChild(infoContainer);
+
     parsedTickets.forEach(ticket => {
         const boleta = document.createElement("div");
         boleta.className = "boleta";
@@ -174,8 +183,6 @@ export function showTickets(ticketsInfo) {
             <div class="number">#${ticket.number}</div>
             <div class="field"><strong>Nombre:</strong> ${name}</div>
             <div class="field"><strong>Teléfono:</strong> ${phone}</div>
-            <div class="field"><strong>ID:</strong> ${ticket.id}</div>
-            <div class="field"><strong>Disponible:</strong> ${ticket.available}</div>
             <small>Nota: Boleta sin cancelar no juega</small>
         `;
 

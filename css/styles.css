@@ -13,10 +13,10 @@ body {
 }
 
 .selected {
-    background: blue !important;
+    background: #00dbff !important;
     color: white !important;
-    font-weight: bold !important;
-    box-shadow: 0 0 5px rgba(0, 238, 255, 0.647);
+    /* font-weight: bold !important; */
+    box-shadow: 0 0 5px rgba(3, 3, 3, 0.7);
 }
 
 .unavailable {
@@ -137,6 +137,14 @@ body {
     align-items: center;
     /* centra horizontalmente las boletas */
     gap: 1rem;
+}
+
+.field {
+    color: #000;
+}
+
+.field strong {
+    color: #007bff;
 }
 
 /* Estilo individual de boleta (opcional, mejora visual) */
