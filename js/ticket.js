@@ -171,6 +171,8 @@ export function showTickets(ticketsInfo) {
                         <div class="field"><strong>Premio:</strong> $5.000.000</div>
                         <div class="field"><strong>Valor boleta:</strong> $100.000</div>
                         <div class="field"><strong>Juega:</strong> Viernes, 19 de dic 2025 con las dos últimas cifras de la lotería de Risaralda</div>
+                        <div class="info">Número invertido recupera la boleta</div>
+                        <div class="field responsables">Responsables: Catalina Castillo (3157023755) - Kevin Mejía (3202152617)</div>
                     `;
     container.appendChild(infoContainer);
 
